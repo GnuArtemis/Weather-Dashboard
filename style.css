@@ -1,0 +1,10 @@
+.navbar-brand.h1{
+    font-size: 2.3rem;
+}
+.container-fluid{
+    width: 97%;
+}
+
+.list-group-item:hover{
+    background-color: salmon;
+}
