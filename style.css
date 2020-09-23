@@ -8,3 +8,11 @@
 .list-group-item:hover{
     background-color: salmon;
 }
+.btn-warning-high {
+    background-color: orangered;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+}
