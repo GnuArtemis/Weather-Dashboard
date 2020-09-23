@@ -1,3 +1,4 @@
+//References to jquery selectors for the main elements on the page
 let cityDisplay = $("#city");
 let tempDisplay = $("#temp");
 let humidityDisplay = $("#humidity");
@@ -5,16 +6,20 @@ let windDisplay = $("#wind");
 let UVDisplay = $("#uv");
 let historyList = $("#history");
 
+//Displays and formats today's date
 var today = new Date();
 var todayFormat = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
 
+//Checks the local storage for previous searches, and if they exist, populates the page with the most recent search and the sidebar with the search history
 var previousSearches = [];
-if(localStorage.getItem("recordedHistory")){
-    previousSearches=localStorage.getItem("recordedHistory");
-    previousSearches=JSON.parse(previousSearches);
+if (localStorage.getItem("recordedHistory")) {
+    $(".card").css("display","block");
+    $("#forecastLabel").css("display","block");
+    previousSearches = localStorage.getItem("recordedHistory");
+    previousSearches = JSON.parse(previousSearches);
     let city = previousSearches[0];
     $.ajax({
-        url: "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&APPID=bf146f8b2cd713f851ae0f254eb2bd20",
+        url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&APPID=bf146f8b2cd713f851ae0f254eb2bd20",
         method: "GET"
     }).then(function (response) {
 
@@ -33,17 +38,22 @@ if(localStorage.getItem("recordedHistory")){
     });
 }
 
-
+//When a search is performed, calls the weather API to provide current weather conditions (and the coordinates for further, more specific api calls). Adds the new search to the search history
 $("form").on("submit", function (event) {
     event.preventDefault();
     clearCurrent();
 
+    if(!localStorage.getItem("recordedHistory")) {
+        $(".card").css("display","block");
+        $("#forecastLabel").css("display","block");
+    }
+
     let city = $("#searchBar").val();
-    if(!city){
+    if (!city) {
         return;
     }
     $.ajax({
-        url: "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&APPID=bf146f8b2cd713f851ae0f254eb2bd20",
+        url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&APPID=bf146f8b2cd713f851ae0f254eb2bd20",
         method: "GET"
     }).then(function (response) {
 
@@ -56,24 +66,26 @@ $("form").on("submit", function (event) {
         newHistory.addClass("list-group-item");
         newHistory.data("whichCity", response.name);
 
-        historyList.prepend(newHistory);
-        
         previousSearches.unshift(response.name);
-        if(previousSearches.length>=10){
+        if (previousSearches.length >= 10) {
             previousSearches.pop();
         }
+
+        historyList.prepend(newHistory);
+
+
         localStorage.setItem("recordedHistory", JSON.stringify(previousSearches));
 
 
     })
 })
 
-
+//When a previous search item is clicked, populates the page with the data for that city
 $("#history").on("click", function (event) {
     clearCurrent();
     let city = $(event.target).data("whichCity");
     $.ajax({
-        url: "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&APPID=bf146f8b2cd713f851ae0f254eb2bd20",
+        url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&APPID=bf146f8b2cd713f851ae0f254eb2bd20",
         method: "GET"
     }).then(function (response) {
 
@@ -84,7 +96,7 @@ $("#history").on("click", function (event) {
     })
 })
 
-
+//Removes all text from the page before the page is repopulated
 function clearCurrent() {
     cityDisplay.empty();
     $("#mainIcon").remove();
@@ -94,13 +106,14 @@ function clearCurrent() {
     UVDisplay.empty();
 }
 
+//Creates the main display, grabbing the City, current date, current weather conditions, temperature, humidity, and windspeed
 function generateMain(response) {
     cityDisplay.text(`${response.name}   ${todayFormat}`);
 
     let weatherIcon = $("<img>");
-    weatherIcon.attr("src", `http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`);
+    weatherIcon.attr("src", `https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`);
     weatherIcon.attr("alt", response.weather[0].description);
-    weatherIcon.attr("id","mainIcon")
+    weatherIcon.attr("id", "mainIcon")
     weatherIcon.addClass("img-fluid");
     weatherIcon.css("width", "8%")
     $("#cityLabel").append(weatherIcon);
@@ -111,10 +124,11 @@ function generateMain(response) {
 
 }
 
+//A seperate api call is required for UV data, this grabs it and displays on the page with an appropriate color-coding 
 function generateUV(response) {
 
     $.ajax({
-        url: `http://api.openweathermap.org/data/2.5/uvi?appid=bf146f8b2cd713f851ae0f254eb2bd20&lat=${response.coord.lat}&lon=${response.coord.lon}`,
+        url: `https://api.openweathermap.org/data/2.5/uvi?appid=bf146f8b2cd713f851ae0f254eb2bd20&lat=${response.coord.lat}&lon=${response.coord.lon}`,
         method: "GET"
     }).then(function (result) {
 
@@ -135,10 +149,11 @@ function generateUV(response) {
     })
 }
 
+//A seperate API call is required for forecast data, this grabs it and displays on the 5 forecast sections 
 function generateForecast(response) {
 
     $.ajax({
-        url: `http://api.openweathermap.org/data/2.5/onecall?lat=${response.coord.lat}&lon=${response.coord.lon}&exclude=hourly,minutely&units=imperial&appid=bf146f8b2cd713f851ae0f254eb2bd20`,
+        url: `https://api.openweathermap.org/data/2.5/onecall?lat=${response.coord.lat}&lon=${response.coord.lon}&exclude=hourly,minutely&units=imperial&appid=bf146f8b2cd713f851ae0f254eb2bd20`,
         method: "GET"
     }).then(function (response) {
         for (let i = 0; i < 5; i++) {

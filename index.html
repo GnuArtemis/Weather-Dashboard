@@ -11,14 +11,17 @@
 </head>
 
 <body>
+    <!-- Formatted header -->
     <nav class="navbar navbar-dark bg-dark justify-content-center" style="font-size: 2.5rem;">
         <span class="navbar-brand mb-0 h1">Weather Dashboard</span>
     </nav>
 
+    
     <main class="container-fluid mt-2">
         <div class="row">
             <aside class="col-md-3">
                 <form>
+                    <!-- City search form -->
                     <label for="searchBar" class="h4">Search for a City:</label>
                     <div class="input-group mb-3 input-group-lg">
                         <input type="text" class="form-control" placeholder="EG: London" aria-label="City search"
@@ -36,69 +39,77 @@
                         </div>
                     </div>
                 </form>
+                <!-- Search history list -->
                 <ul class="list-group" id="history">
                 </ul>
             </aside>
             <article class="col-md-9">
-                <div class="row">
+                <div class="row main-section px-3">
+                    <!-- Main section detailing weather conditions at the current time -->
                     <div class="col">
                         <div class="wrapper" id="cityLabel">
-                            <h1 id="city">City</h1>
+                            <h1 id="city"></h1>
                         </div>
-                        <p class="lead" id="temp">Temperature</p>
-                        <p class="lead" id="humidity">Humidity</p>
-                        <p class="lead" id="wind">Wind Speed</p>
-                        <p class="lead" id="uv">UV Index</p>
+                        <p class="lead" id="temp"></p>
+                        <p class="lead" id="humidity"></p>
+                        <p class="lead" id="wind"></p>
+                        <p class="lead" id="uv"></p>
+                    </div>
+                </div>
+                <!-- Forcast section for the next -->
+                <div class="row">
+                    <div class="col">
+                        <h1 id="forecastLabel" style="display: none;">5-day Forecast</h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg">
-                        <div class="card">
+                        <div class="card text-light bg-primary" style="display: none;">
                             <div class="card-body">
-                                <h5 class="card-title" id="0Day">5/5/2929</h5>
-                                <img src="http://placekitten.com/50/50" alt="weather icon" id="0Icon">
-                                <p class="card-text" id="0Temp">temp</p>
-                                <p class="card-text" id="0Humidity">humidity</p>
+                                <h5 class="card-title" id="0Day"></h5>
+                                <img src="" alt="weather icon" id="0Icon">
+                                <p class="card-text" id="0Temp"></p>
+                                <p class="card-text" id="0Humidity"></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg">
-                        <div class="card">
+                        <div class="card text-light bg-primary" style="display: none;">
                             <div class="card-body">
-                                <h5 class="card-title" id="1Day">5/5/2929</h5>
-                                <img src="http://placekitten.com/50/50" alt="weather icon" id="1Icon">
-                                <p class="card-text" id="1Temp">temp</p>
-                                <p class="card-text" id="1Humidity">humidity</p>
+                                <h5 class="card-title" id="1Day"></h5>
+                                <img src="" alt="weather icon" id="1Icon">
+                                <p class="card-text" id="1Temp"></p>
+                                <p class="card-text" id="1Humidity"></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg">
-                        <div class="card">
+                        <div class="card text-light bg-primary" style="display: none;">
                             <div class="card-body">
-                                <h5 class="card-title" id="2Day">5/5/2929</h5>
-                                <img src="http://placekitten.com/50/50" alt="weather icon" id="2Icon">
-                                <p class="card-text" id="2Temp">temp</p>
-                                <p class="card-text" id="2Humidity">humidity</p>
+                                <h5 class="card-title" id="2Day"></h5>
+                                <img src="" alt="weather icon" id="2Icon">
+                                <p class="card-text" id="2Temp"></p>
+                                <p class="card-text" id="2Humidity"></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg">
-                        <div class="card">
+                        <div class="card text-light bg-primary" style="display: none;">
                             <div class="card-body">
-                                <h5 class="card-title" id="3Day">5/5/2929</h5>
-                                <img src="http://placekitten.com/50/50" alt="weather icon" id="3Icon">
-                                <p class="card-text" id="3Temp">temp</p>
-                                <p class="card-text" id="3Humidity">humidity</p>
+                                <h5 class="card-title" id="3Day"></h5>
+                                <img src="" alt="weather icon" id="3Icon">
+                                <p class="card-text" id="3Temp"></p>
+                                <p class="card-text" id="3Humidity"></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg">
-                        <div class="card">
+                        <div class="card text-light bg-primary" style="display: none;">
                             <div class="card-body">
-                                <h5 class="card-title" id="4Day">5/5/2929</h5>
-                                <img src="http://placekitten.com/50/50" alt="weather icon" id="4Icon">
-                                <p class="card-text" id="4Temp">temp</p>
-                                <p class="card-text" id="4Humidity">humidity</p>
+                                <h5 class="card-title" id="4Day"></h5>
+                                <img src="" alt="weather icon" id="4Icon">
+                                <p class="card-text" id="4Temp"></p>
+                                <p class="card-text" id="4Humidity"></p>
                             </div>
                         </div>
                     </div>
