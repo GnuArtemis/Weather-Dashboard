@@ -1,5 +1,8 @@
 # Weather-Dashboard
 ## Description
+
+![GitHub top language](https://img.shields.io/github/languages/top/gnuartemis/Weather-Dashboard)
+
 Displays the current and forecasted weather conditions for any city. A search bar is provided for user input. Previous searches are displayed in a list to the left, and persist between browser sessions.
 
 ## Technology
@@ -15,6 +18,7 @@ Displays the current and forecasted weather conditions for any city. A search ba
 ## License
 
 [MIT]Copyright (c) [2020] [Ann Guinee]
+![GitHub](https://img.shields.io/github/license/gnuartemis/Weather-Dashboard)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
